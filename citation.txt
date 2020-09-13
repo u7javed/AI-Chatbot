@@ -1,0 +1,8 @@
+ @InProceedings{Danescu-Niculescu-Mizil+Lee:11a,
+  author={Cristian Danescu-Niculescu-Mizil and Lillian Lee},
+  title={Chameleons in imagined conversations:
+  A new approach to understanding coordination of linguistic style in dialogs.},
+  booktitle={Proceedings of the
+        Workshop on Cognitive Modeling and Computational Linguistics, ACL 2011},
+  year={2011}
+}
