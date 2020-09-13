@@ -27,6 +27,7 @@ def main():
     
     #default hyperparameters
     parser.add_argument('--MAX_LENGTH', type=int, default=20, help='max length of a sentence')
+    parser.add_argument('--epochs_trained', type=int, default=10, help='number of epochs trained in train.py')
     parser.add_argument('--hidden_size', type=int, default=512, help='size of hidden layer for encoder and decoder')
     parser.add_argument('--encoder_n_layers', type=int, default=2, help='number of encoder gru layers')
     parser.add_argument('--decoder_n_layers', type=int, default=2, help='number of decoder gru layers')
@@ -39,6 +40,7 @@ def main():
 
     #hyperparameters
     MAX_LENGTH = args.MAX_LENGTH
+    epochs_trained = args.epochs_trained
     hidden_size = args.hidden_size
     encoder_n_layers = args.encoder_n_layers
     decoder_n_layers = args.decoder_n_layers
@@ -51,15 +53,15 @@ def main():
 
     #load embedder weights
     embedding = nn.Embedding(dictionary.n_count, hidden_size)
-    embedding.load_state_dict(torch.load(model_directory + 'embedding.pt'))
+    embedding.load_state_dict(torch.load(model_directory + 'embedding_' + str(epochs_trained - 1) + '.pt'))
 
     #load encoder weights
     encoder = Encoder(hidden_size, embedding, encoder_n_layers, encoder_dropout).to(device)
-    encoder.load_state_dict(torch.load(model_directory + 'encoder.pt'))
+    encoder.load_state_dict(torch.load(model_directory + 'encoder_' + str(epochs_trained - 1) + '.pt'))
 
     #load decoder weights
     decoder = Decoder(hidden_size, embedding, dictionary.n_count, decoder_n_layers, decoder_dropout).to(device)
-    decoder.load_state_dict(torch.load(model_directory + 'decoder.pt'))
+    decoder.load_state_dict(torch.load(model_directory + 'decoder_' + str(epochs_trained - 1) + '.pt'))
 
     model = Seq2Seq(encoder, decoder, device)
     print('To exit chatbot, enter \'q\' or \'quit\'.\n')
