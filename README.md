@@ -17,6 +17,9 @@ Python Files:
   - utilities.py
     - Contains various utility functions for preprocessing, training, postprocessing, and evaluating
     
+  - dictionary.py
+    - Contains the dictionary class that keeps track of all word/token pairs, their occurences, their index, etc.
+    
   - models.py
     - Contains the models such as the decoder, encoder, attention mechanism, mask loss, and the Seq2Seq
     
@@ -40,23 +43,23 @@ Python Files:
 
 ## Samples
 
-Input: Hello.
-Bot: hello .
+**Input: Hello.
+Bot: hello .**
 
-Input: It's a nice day.
-Bot: yes.
+**Input: It's a nice day.
+Bot: yes.**
 
-Input: Tell me something.
-Bot: i was in the middle of the place .
+**Input: Tell me something.
+Bot: i was in the middle of the place .**
 
-Input: Tell me a joke.
-Bot: i don't care .
+**Input: Tell me a joke.
+Bot: i don't care .**
 
-Input: Rude.
-Bot: i know .
+**Input: Rude.
+Bot: i know .**
 
-Input: Are you sorry?
-Bot: yes .
+**Input: Are you sorry?
+Bot: yes .**
 
-Input: Goodnight.
-Bot: goodnight .
+**Input: Goodnight.
+Bot: goodnight .**
