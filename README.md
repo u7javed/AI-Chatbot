@@ -26,9 +26,9 @@ Python Files:
   - evaluate.py
     - An executable python script. Run as follows:
     ```
-    python evaluate.py
+    python evaluate.py -gui
     ```
-    to chat with the chatbot indefinitely or until the exit commands are entered. If you changed the hyperparamters in the trained model, please enter them according to the paramters available (refer to evaluate.py for more info.) and input them in same manner as described in the **train.py** file.
+    to chat with the chatbot indefinitely or until the exit commands are entered. Note that the `-gui` flag runs a GUI window via PySide6. If you changed the hyperparamters in the trained model, please enter them according to the parameters available (refer to evaluate.py for more info.) and input them in same manner as described in the **train.py** file.
     
 ### To train, Run the following steps:
   - Step 1

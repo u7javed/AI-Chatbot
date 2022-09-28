@@ -4,6 +4,7 @@ import torch
 import random
 from random import shuffle
 import numpy as np 
+import gui.gui_window
 
 PAD_TOKEN = 0
 SOS_TOKEN = 1
@@ -55,7 +56,7 @@ def evaluate(encoder, decoder, seq2seq, dictionary, sentence, device, max_length
     input_batch = torch.LongTensor(indexes_batch).transpose(0, 1)
     # Use appropriate device
     input_batch = input_batch.to(device)
-    lengths = lengths.to(device)
+    lengths = lengths.to('cpu')
     # Decode sentence with seq2seq
     tokens, scores = seq2seq(input_batch, lengths, max_length)
     # indexes -> words
@@ -89,3 +90,6 @@ def evaluateInput(encoder, decoder, seq2seq, dictionary, device, max_length):
 
         except KeyError:
             print("Error: Encountered unknown word.")
+            
+def evaluateGuiInput(encoder, decoder, seq2seq, dictionary, device, max_length):
+    gui.gui_window.execute_gui(encoder, decoder, seq2seq, dictionary, device, max_length)

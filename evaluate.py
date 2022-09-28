@@ -33,6 +33,8 @@ def main():
     parser.add_argument('--decoder_n_layers', type=int, default=2, help='number of decoder gru layers')
     parser.add_argument('--encoder_dropout', type=float, default=0.1, help='dropout in encoder ff')
     parser.add_argument('--decoder_dropout', type=float, default=0.1, help='dropout in decoder ff')
+    parser.add_argument('--device', type=str, default='cpu', help='device to run computations')
+    parser.add_argument('-gui', action='store_true')
     
     args = parser.parse_args()
    
@@ -47,7 +49,9 @@ def main():
     encoder_dropout = args.encoder_dropout
     decoder_dropout = args.decoder_dropout
 
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    device = args.device
+    if not torch.cuda.is_available():
+        device = 'cpu'
 
     dictionary = load_dictionary(model_directory)
 
@@ -64,8 +68,12 @@ def main():
     decoder.load_state_dict(torch.load(model_directory + 'decoder_' + str(epochs_trained - 1) + '.pt'))
 
     model = Seq2Seq(encoder, decoder, device)
-    print('To exit chatbot, enter \'q\' or \'quit\'.\n')
-    evaluateInput(encoder, decoder, model, dictionary, device, MAX_LENGTH)
+    
+    if args.gui:
+        evaluateGuiInput(encoder, decoder, model, dictionary, device, MAX_LENGTH)
+    else:
+        print('To exit chatbot, enter \'q\' or \'quit\'.\n')
+        evaluateInput(encoder, decoder, model, dictionary, device, MAX_LENGTH)
 
 
 if __name__ == "__main__":

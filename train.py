@@ -25,6 +25,8 @@ class Trainer():
         self.saved_model_directory = saved_model_directory
         self.device = device
         self.clip = clip
+        
+        print(f"Using {self.device} to train.")
 
         pairs = []
         #split into pairs
@@ -79,7 +81,7 @@ class Trainer():
                 self.encoder_optimizer.zero_grad()
                 self.decoder_optimizer.zero_grad()
 
-                encoder_outputs, encoder_hidden = self.encoder(inp, lengths)
+                encoder_outputs, encoder_hidden = self.encoder(inp.to(self.device), lengths.to('cpu'))
 
                 decoder_inp = torch.LongTensor([[SOS_TOKEN for _ in range(b_size)]])
                 decoder_inp = decoder_inp.to(self.device)
